@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    kotlin("plugin.serialization")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -17,6 +19,12 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
+        }
+        ndk {
+            abiFilters.addAll(listOf(
+                "arm64-v8a",
+                "x86_64",
+            ))
         }
     }
 
@@ -66,25 +74,42 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    // https://mvnrepository.com/artifact/io.insert-koin/koin-androidx-compose
+    implementation(libs.androidx.material3.window.size)
+    implementation(libs.androidx.material.icons.extended)
+
+    // 导航
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.navigation.navigation.fragment.ktx25)
+    implementation(libs.androidx.navigation.navigation.ui.ktx25)
+    implementation(libs.androidx.navigation.navigation.dynamic.features.fragment7)
+
     // koin 依赖注入框架
     implementation(libs.koin.androidx.compose)
-    // https://mvnrepository.com/artifact/com.squareup.okhttp3/okhttp
     // okhttp
     implementation(libs.okhttp)
-    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-serialization-json
     // json
     implementation(libs.kotlinx.serialization.json)
     // 这个库提供了一组类似于可组合项的设置来帮助android Jetpack组合 开发人员构建复杂的设置屏幕，而无需所有样板文件。
     implementation(libs.github.ui.tiles)
-    // https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit
     // retrofit
     implementation(libs.squareup.retrofit)
-
     // room 使用 Room 持久保留数据
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.paging)
     implementation(libs.androidx.room.ktx)
-    implementation (libs.androidx.room.room.compiler2)
+    ksp(libs.androidx.room.room.compiler2)
+    // Coil 是一个 Android 图片加载库，通过 Kotlin 协程的方式加载图片
+    implementation(libs.io.coil.kt.coil2)
+    // Comparist是一组库，旨在为Jetpack Compose提供开发人员通常需要但尚未提供的功能。
+    implementation(libs.com.google.accompanist.accompanist.permissions2)
+    implementation(libs.accompanist.navigation.animation)
+    // mmkv
+    implementation(libs.mmkv.static)
+    implementation(libs.markdown)
+}
 
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
 }
