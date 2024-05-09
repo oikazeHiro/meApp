@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    kotlin("plugin.serialization")
     id("com.google.devtools.ksp")
 }
 
@@ -19,12 +18,6 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true
-        }
-        ndk {
-            abiFilters.addAll(listOf(
-                "arm64-v8a",
-                "x86_64",
-            ))
         }
     }
 
@@ -46,6 +39,8 @@ android {
     }
     buildFeatures {
         compose = true
+        // Disable unused AGP features
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -66,7 +61,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -74,14 +68,18 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.androidx.material3.window.size)
-    implementation(libs.androidx.material.icons.extended)
+//    implementation(libs.androidx.material.icons.extended)
 
     // 导航
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.navigation.navigation.fragment.ktx25)
-    implementation(libs.androidx.navigation.navigation.ui.ktx25)
-    implementation(libs.androidx.navigation.navigation.dynamic.features.fragment7)
+
+    implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.compose.material3.adaptive)
+    implementation(libs.androidx.compose.material3.adaptive.layout)
+    implementation(libs.androidx.compose.material3.adaptive.navigation)
+    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+
+    implementation(libs.androidx.window.core)
 
     // koin 依赖注入框架
     implementation(libs.koin.androidx.compose)
@@ -89,9 +87,7 @@ dependencies {
     implementation(libs.okhttp)
     // json
     implementation(libs.kotlinx.serialization.json)
-    // 这个库提供了一组类似于可组合项的设置来帮助android Jetpack组合 开发人员构建复杂的设置屏幕，而无需所有样板文件。
-    implementation(libs.github.ui.tiles)
-    // retrofit
+    // retrofit Retrofit将您的HTTP API转换为Java接口
     implementation(libs.squareup.retrofit)
     // room 使用 Room 持久保留数据
     implementation(libs.androidx.room.runtime)
@@ -100,16 +96,14 @@ dependencies {
     ksp(libs.androidx.room.room.compiler2)
     // Coil 是一个 Android 图片加载库，通过 Kotlin 协程的方式加载图片
     implementation(libs.io.coil.kt.coil2)
-    // Comparist是一组库，旨在为Jetpack Compose提供开发人员通常需要但尚未提供的功能。
-    implementation(libs.com.google.accompanist.accompanist.permissions2)
-    implementation(libs.accompanist.navigation.animation)
     // mmkv
     implementation(libs.mmkv.static)
-    implementation(libs.markdown)
+
+    implementation(libs.material.icons.extended)
+
 }
 
 
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
-    arg("room.incremental", "true")
 }
