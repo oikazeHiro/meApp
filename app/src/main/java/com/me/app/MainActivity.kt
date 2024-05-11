@@ -14,9 +14,11 @@ import androidx.navigation.compose.rememberNavController
 import com.me.app.ui.component.index.RallyNavHost
 import com.me.app.ui.theme.MyApplicationTheme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContent {
             RallyApp()
         }
