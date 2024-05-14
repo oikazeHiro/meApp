@@ -68,7 +68,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-//    implementation(libs.androidx.material.icons.extended)
+
+    // 协程
+    implementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.android4)
 
     // 导航
     implementation(libs.androidx.navigation.compose)
@@ -85,10 +87,11 @@ dependencies {
     implementation(libs.koin.androidx.compose)
     // okhttp
     implementation(libs.okhttp)
-    // json
-    implementation(libs.kotlinx.serialization.json)
     // retrofit Retrofit将您的HTTP API转换为Java接口
     implementation(libs.squareup.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.logging.interceptor)
+
     // room 使用 Room 持久保留数据
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.paging)

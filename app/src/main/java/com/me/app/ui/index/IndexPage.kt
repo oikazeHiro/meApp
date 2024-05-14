@@ -1,4 +1,4 @@
-package com.me.app.ui.component.index
+package com.me.app.ui.index
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -29,15 +29,19 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import com.me.app.R
-import com.me.app.ui.component.index.layout.ContactDestination
-import com.me.app.ui.component.index.layout.HomeDestination
-import com.me.app.ui.component.index.layout.MeDestination
-import com.me.app.ui.component.index.layout.MessageDestination
+import com.me.app.ui.index.layout.ContactDestination
+import com.me.app.ui.index.layout.HomeDestination
+import com.me.app.ui.index.layout.MeDestination
+import com.me.app.ui.index.layout.MessageDestination
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun IndexPage(modifier: Modifier = Modifier) {
+fun IndexPage(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     var currentDestination by rememberSaveable { mutableStateOf(AppDestinations.HOME) }
 
     Scaffold(
@@ -61,22 +65,23 @@ fun IndexPage(modifier: Modifier = Modifier) {
             }
         }
     ) { innerPadding ->
-        DetailsScreenButtonBar(currentDestination, Modifier.padding(innerPadding))
+        DetailsScreenButtonBar(navController,currentDestination, Modifier.padding(innerPadding))
     }
 
 }
 
 @Composable
 fun DetailsScreenButtonBar(
+    navController: NavHostController,
     appDestinations: AppDestinations,
     modifier: Modifier = Modifier
 ) {
     Box(modifier = modifier) {
         when (appDestinations) {
-            AppDestinations.HOME -> HomeDestination()
-            AppDestinations.CONTACT -> ContactDestination()
-            AppDestinations.MESSAGE -> MessageDestination()
-            AppDestinations.ME -> MeDestination()
+            AppDestinations.HOME -> HomeDestination(navController)
+            AppDestinations.CONTACT -> ContactDestination(navController)
+            AppDestinations.MESSAGE -> MessageDestination(navController)
+            AppDestinations.ME -> MeDestination(navController)
         }
     }
 }

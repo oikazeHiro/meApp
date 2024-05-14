@@ -1,10 +1,12 @@
-package com.me.app.ui.component.index
+package com.me.app.ui.router
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.me.app.ui.index.IndexPage
+import com.me.app.ui.login.LoginPage
 
 @Composable
 fun RallyNavHost(
@@ -14,10 +16,13 @@ fun RallyNavHost(
     NavHost(
         navController = navController,
         startDestination = "index",
-        modifier = modifier
+        modifier = modifier,
     ){
         composable("index"){
-            IndexPage()
+            IndexPage(navController = navController)
+        }
+        composable("login"){
+            LoginPage(navController = navController)
         }
     }
 }

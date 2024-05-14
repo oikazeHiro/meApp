@@ -11,14 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.me.app.ui.component.index.RallyNavHost
+import com.me.app.ui.router.RallyNavHost
 import com.me.app.ui.theme.MyApplicationTheme
+import com.tencent.mmkv.MMKV
 
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        MMKV.initialize(this)
         setContent {
             RallyApp()
         }

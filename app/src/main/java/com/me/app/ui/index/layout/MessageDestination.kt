@@ -1,11 +1,12 @@
-package com.me.app.ui.component.index.layout
+package com.me.app.ui.index.layout
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.navigation.NavHostController
 import com.me.app.R
 
 @Composable
-fun MessageDestination() {
+fun MessageDestination(navController: NavHostController,) {
     Text(text = stringResource(id = R.string.message), maxLines = 1)
 }
