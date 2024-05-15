@@ -35,8 +35,8 @@ fun GreetingPreview() {
 @Composable
 fun RallyApp() {
     val navController = rememberNavController()
-    MyApplicationTheme {
 
+    MyApplicationTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             containerColor = MaterialTheme.colorScheme.background

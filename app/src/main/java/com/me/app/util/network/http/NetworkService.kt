@@ -4,7 +4,7 @@ import kotlin.reflect.KProperty
 
 object NetworkService {
 
-    private const val BASE_URL = "http://127.0.0.1:8080"
+    private const val BASE_URL = "http://127.0.0.1:7500"
 
     val api by Service()
 
