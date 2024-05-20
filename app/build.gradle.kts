@@ -55,7 +55,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+//    implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
@@ -71,6 +71,9 @@ dependencies {
 
     // 协程
     implementation(libs.org.jetbrains.kotlinx.kotlinx.coroutines.android4)
+    // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
+    runtimeOnly(libs.org.jetbrains.kotlinx.kotlinx.coroutines.core)
+
 
     // 导航
     implementation(libs.androidx.navigation.compose)
@@ -103,6 +106,10 @@ dependencies {
     implementation(libs.mmkv.static)
 
     implementation(libs.material.icons.extended)
+
+// https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-runtime-ktx
+    implementation(libs.lifecycle.runtime.ktx.v280)
+
 
 }
 

@@ -15,7 +15,7 @@ fun RallyNavHost(
 ){
     NavHost(
         navController = navController,
-        startDestination = "index",
+        startDestination = "login",
         modifier = modifier,
     ){
         composable("index"){

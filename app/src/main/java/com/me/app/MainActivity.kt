@@ -35,7 +35,6 @@ fun GreetingPreview() {
 @Composable
 fun RallyApp() {
     val navController = rememberNavController()
-
     MyApplicationTheme {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
